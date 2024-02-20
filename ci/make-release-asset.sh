@@ -45,6 +45,6 @@ cd ../..
 if [[ -z "$GITHUB_ENV" ]]; then
     echo "GITHUB_ENV not set, run: gh release upload $TAG target/$asset"
 else
-    echo "$TAG=$TAG" >>$GITHUB_ENV
-    echo "$ASSET=target/$asset" >>$GITHUB_ENV
+    echo "TAG=$TAG" >>$GITHUB_ENV
+    echo "ASSET=target/$asset" >>$GITHUB_ENV
 fi
