@@ -31,6 +31,7 @@ jobs:
       - name: Upload assets
         uses: ncipollo/release-action@v1
         with:
+          allowUpdates: true
           artifacts: "helloworld-${{ matrix.os }}.tar.gz"
           bodyFile: "README.md"
           token: ${{ secrets.YOUR_GITHUB_TOKEN }}
