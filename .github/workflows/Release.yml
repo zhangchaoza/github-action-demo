@@ -1,8 +1,9 @@
 name: Releases
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - "v*"
 
 env:
   CARGO_TERM_COLOR: always
@@ -30,10 +31,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.YOUR_GITHUB_TOKEN }}
         run: gh release upload ${{ steps.get_version.outputs.VERSION }} helloworld-${{ matrix.os }}.tar.gz
-      # - name: Upload assets
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     allowUpdates: true
-      #     artifacts: "helloworld-${{ matrix.os }}.tar.gz"
-      #     bodyFile: "README.md"
-      #     token: ${{ secrets.YOUR_GITHUB_TOKEN }}
