@@ -18,6 +18,9 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Release
         run: cargo build --release
       - name: Package
@@ -26,7 +29,7 @@ jobs:
       - name: Update release with new asset
         env:
           GITHUB_TOKEN: ${{ secrets.YOUR_GITHUB_TOKEN }}
-        run: gh release upload ${{GITHUB_REF#*/tags/}} helloworld-${{ matrix.os }}.tar.gz
+        run: gh release upload ${{ steps.get_version.outputs.VERSION }} helloworld-${{ matrix.os }}.tar.gz
       # - name: Upload assets
       #   uses: ncipollo/release-action@v1
       #   with:
