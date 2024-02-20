@@ -1,9 +1,8 @@
 name: Releases
 
 on:
-  push:
-    tags:
-      - "*"
+  release:
+    types: [created]
 
 env:
   CARGO_TERM_COLOR: always
