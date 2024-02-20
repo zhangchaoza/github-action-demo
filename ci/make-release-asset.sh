@@ -6,7 +6,7 @@ if [[ -z "$GITHUB_REF" ]]; then
     echo "GITHUB_REF must be set"
     exit 1
 fi
-# Strip helloworld-refs/tags/ from the start of the ref.
+# Strip hello_world-refs/tags/ from the start of the ref.
 TAG=${GITHUB_REF#*/tags/}
 
 host=$(rustc -Vv | grep ^host: | sed -e "s/host: //g")
@@ -15,26 +15,26 @@ if [ "$host" != "$target" ]; then
     export "CARGO_TARGET_$(echo $target | tr a-z- A-Z_)_LINKER"=rust-lld
 fi
 export CARGO_PROFILE_RELEASE_LTO=true
-cargo build --locked --bin helloworld --release --target $target
+cargo build --locked --bin hello_world --release --target $target
 cd target/$target/release
 case $1 in
 ubuntu*)
-    asset="helloworld-$TAG-$target.tar.gz"
-    tar czf ../../$asset helloworld
+    asset="hello_world-$TAG-$target.tar.gz"
+    tar czf ../../$asset hello_world
     ;;
 macos*)
-    asset="helloworld-$TAG-$target.tar.gz"
+    asset="hello_world-$TAG-$target.tar.gz"
     # There is a bug with BSD tar on macOS where the first 8MB of the file are
     # sometimes all NUL bytes. See https://github.com/actions/cache/issues/403
     # and https://github.com/rust-lang/cargo/issues/8603 for some more
     # information. An alternative solution here is to install GNU tar, but
     # flushing the disk cache seems to work, too.
     sudo /usr/sbin/purge
-    tar czf ../../$asset helloworld
+    tar czf ../../$asset hello_world
     ;;
 windows*)
-    asset="helloworld-$TAG-$target.zip"
-    7z a ../../$asset helloworld.exe
+    asset="hello_world-$TAG-$target.zip"
+    7z a ../../$asset hello_world.exe
     ;;
 *)
     echo "OS should be first parameter, was: $1"
