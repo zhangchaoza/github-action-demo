@@ -1,9 +1,8 @@
 name: Releases
 
 on:
-  push:
-    tags:
-      - "v*"
+  release:
+    types: [created]
 
 defaults:
   run:
