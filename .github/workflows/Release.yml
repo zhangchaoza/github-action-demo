@@ -1,0 +1,36 @@
+name: Releases
+
+on:
+  push:
+    tags:
+      - "*"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Release
+        run: cargo build --release
+
+      - name: Package
+        working-directory: .
+        run: |
+          tar -zcvf helloworld-${{ matrix.os }}.tar.gz -C target/release hello_world
+
+      - name: Upload assets
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "helloworld-${{ matrix.os }}.tar.gz"
+          bodyFile: "README.md"
+          token: ${{ secrets.YOUR_GITHUB_TOKEN }}
