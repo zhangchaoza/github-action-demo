@@ -72,5 +72,5 @@ ea8c81ff30d9  ghcr.io/catthehacker/ubuntu:rust-latest              1 second ago 
 maybe you should add the podman identity key to ssh-agent first.
 
 ```powershell
-ssh-add $HOME/.ssh/C:\Users\zhangchao\.ssh\podman-machine-2
+ssh-add $HOME/.ssh/podman-machine-2
 ```
