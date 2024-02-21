@@ -74,3 +74,40 @@ maybe you should add the podman identity key to ssh-agent first.
 ```powershell
 ssh-add $HOME/.ssh/podman-machine-2
 ```
+
+## podman on linux
+
+Add `CONTAINER_HOST` env var by `export CONTAINER_HOST=unix://$(podman info --format '{{.Host.RemoteSocket.Path}}')`
+
+```bash
+$ act --container-daemon-socket $CONTAINER_HOST -P ubuntu-latest=catthehacker/ubuntu:rust-latest
+[Rust/build-1] 🚀  Start image=catthehacker/ubuntu:rust-latest
+[Rust/build-2] 🚧  Skipping unsupported platform -- Try running with `-P windows-latest=...`
+[Rust/build-3] 🚧  Skipping unsupported platform -- Try running with `-P macos-latest=...`
+[Rust/build-1]   🐳  docker pull image=catthehacker/ubuntu:rust-latest platform= username= forcePull=true
+[Rust/build-1]   🐳  docker create image=catthehacker/ubuntu:rust-latest platform= entrypoint=["tail" "-f" "/dev/null"] cmd=[]
+[Rust/build-1]   🐳  docker run image=catthehacker/ubuntu:rust-latest platform= entrypoint=["tail" "-f" "/dev/null"] cmd=[]
+[Rust/build-1] 🧪  Matrix: map[os:ubuntu-latest]
+[Rust/build-1] ⭐ Run Main actions/checkout@v3
+[Rust/build-1]   🐳  docker cp src=/home/zhangchao/sources/github/zhangchao/github-action-demo/. dst=/home/zhangchao/sources/github/zhangchao/github-action-demo
+[Rust/build-1]   ✅  Success - Main actions/checkout@v3
+[Rust/build-1] ⭐ Run Main Build
+[Rust/build-1]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1] user= workdir=
+|    Compiling hello_world v0.1.0 (/home/zhangchao/sources/github/zhangchao/github-action-demo)
+|      Running `/usr/share/rust/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc --crate-name hello_world --edition=2021 src/main.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type bin --emit=dep-info,link -C embed-bitcode=no -C debuginfo=2 -C metadata=63db71e2032dbcc4 -C extra-filename=-63db71e2032dbcc4 --out-dir /home/zhangchao/sources/github/zhangchao/github-action-demo/target/debug/deps -C incremental=/home/zhangchao/sources/github/zhangchao/github-action-demo/target/debug/incremental -L dependency=/home/zhangchao/sources/github/zhangchao/github-action-demo/target/debug/deps`
+|     Finished dev [unoptimized + debuginfo] target(s) in 0.11s
+[Rust/build-1]   ✅  Success - Main Build
+[Rust/build-1] ⭐ Run Main Run tests
+[Rust/build-1]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/2] user= workdir=
+|    Compiling hello_world v0.1.0 (/home/zhangchao/sources/github/zhangchao/github-action-demo)
+|      Running `/usr/share/rust/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc --crate-name hello_world --edition=2021 src/main.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --emit=dep-info,link -C embed-bitcode=no -C debuginfo=2 --test -C metadata=4b61e41928288fa3 -C extra-filename=-4b61e41928288fa3 --out-dir /home/zhangchao/sources/github/zhangchao/github-action-demo/target/debug/deps -C incremental=/home/zhangchao/sources/github/zhangchao/github-action-demo/target/debug/incremental -L dependency=/home/zhangchao/sources/github/zhangchao/github-action-demo/target/debug/deps`
+|     Finished test [unoptimized + debuginfo] target(s) in 0.11s
+|      Running `/home/zhangchao/sources/github/zhangchao/github-action-demo/target/debug/deps/hello_world-4b61e41928288fa3`
+| 
+| running 0 tests
+| 
+| test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+| 
+[Rust/build-1]   ✅  Success - Main Run tests
+[Rust/build-1] 🏁  Job succeeded
+```
