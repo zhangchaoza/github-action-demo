@@ -111,3 +111,105 @@ $ act --container-daemon-socket $CONTAINER_HOST -P ubuntu-latest=catthehacker/ub
 [Rust/build-1]   ✅  Success - Main Run tests
 [Rust/build-1] 🏁  Job succeeded
 ```
+
+## use cake action
+
+Get the `GitHubActions` object on ubuntu-latest
+
+```json
+{
+  "IsRunningOnGitHubActions": true,
+  "Environment": {
+    "Home": "/home/runner",
+    "Runner": {
+      "Name": "GitHub Actions 10",
+      "OS": "Linux",
+      "Temp": "/home/runner/work/_temp",
+      "ToolCache": "/opt/hostedtoolcache",
+      "Workspace": "/home/runner/work/github-action-demo",
+      "ImageOS": "ubuntu22",
+      "ImageVersion": "20240721.1.0",
+      "User": "runner",
+      "Architecture": 2
+    },
+    "Workflow": {
+      "Action": "__cake-build_cake-action",
+      "ActionPath": null,
+      "Actor": "zhangchaoza",
+      "ApiUrl": "https://api.github.com",
+      "BaseRef": "",
+      "EventName": "workflow_dispatch",
+      "EventPath": "/home/runner/work/_temp/_github_workflow/event.json",
+      "GraphQLUrl": "https://api.github.com/graphql",
+      "HeadRef": "",
+      "Job": "print",
+      "Ref": "refs/heads/main",
+      "Repository": "zhangchaoza/github-action-demo",
+      "RepositoryOwner": "zhangchaoza",
+      "RunId": "10195649957",
+      "RunNumber": 5,
+      "ServerUrl": "https://github.com",
+      "Sha": "48b5be64dfec2916d6882a55c947515e823a0a94",
+      "Workflow": "cake workflow",
+      "Workspace": "/home/runner/work/github-action-demo/github-action-demo",
+      "Attempt": 1,
+      "RefProtected": false,
+      "RefName": "main",
+      "RefType": 1
+    },
+    "PullRequest": {
+      "IsPullRequest": false
+    },
+    "Runtime": {
+      "IsRuntimeAvailable": true,
+      "Token": ***,
+      "Url": "https://pipelinesghubeus4.actions.githubusercontent.com/3yeEyfbM7ycsZ4BnfFviynrY0v0rwz0C8aWsqTYPqw2yPJGL4h/",
+      "EnvPath": "/home/runner/work/_temp/_runner_file_commands/set_env_99f33bf6-4845-44f9-93cd-49ca705049c4",
+      "OutputPath": "/home/runner/work/_temp/_runner_file_commands/set_output_99f33bf6-4845-44f9-93cd-49ca705049c4",
+      "StepSummary": "/home/runner/work/_temp/_runner_file_commands/step_summary_99f33bf6-4845-44f9-93cd-49ca705049c4",
+      "SystemPath": "/home/runner/work/_temp/_runner_file_commands/add_path_99f33bf6-4845-44f9-93cd-49ca705049c4"
+    }
+  },
+  "Commands": {}
+}
+```
+
+Get `GitVersion` object
+
+```json
+{
+  "Major": 1,
+  "Minor": 0,
+  "Patch": 1,
+  "PreReleaseTag": "9",
+  "PreReleaseTagWithDash": "-9",
+  "PreReleaseLabel": "",
+  "PreReleaseLabelWithDash": "",
+  "PreReleaseNumber": 9,
+  "WeightedPreReleaseNumber": 55009,
+  "BuildMetaData": null,
+  "BuildMetaDataPadded": null,
+  "FullBuildMetaData": "Branch.main.Sha.48b5be64dfec2916d6882a55c947515e823a0a94",
+  "MajorMinorPatch": "1.0.1",
+  "SemVer": "1.0.1-9",
+  "LegacySemVer": null,
+  "LegacySemVerPadded": null,
+  "AssemblySemVer": "1.0.1.0",
+  "AssemblySemFileVer": "1.0.1.0",
+  "FullSemVer": "1.0.1-9",
+  "InformationalVersion": "1.0.1-9+Branch.main.Sha.48b5be64dfec2916d6882a55c947515e823a0a94",
+  "BranchName": "main",
+  "EscapedBranchName": "main",
+  "Sha": "48b5be64dfec2916d6882a55c947515e823a0a94",
+  "ShortSha": "48b5be6",
+  "NuGetVersionV2": null,
+  "NuGetVersion": null,
+  "NuGetPreReleaseTagV2": null,
+  "NuGetPreReleaseTag": null,
+  "VersionSourceSha": "2ab2cce3696aca056b58c14c8be25ef4017d76a0",
+  "CommitsSinceVersionSource": 9,
+  "CommitsSinceVersionSourcePadded": null,
+  "UncommittedChanges": 0,
+  "CommitDate": "2024-08-01"
+}
+```
