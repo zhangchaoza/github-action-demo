@@ -20,9 +20,6 @@ jobs:
           target: PrintGithub
   gitversion:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,3 +29,27 @@ jobs:
         with:
           cake-version: 4.0.0
           target: Gitversion
+      - name: Display gitversion
+        run: |
+          echo "Major $GitVersion_Major"
+          echo "Minor $GitVersion_Minor"
+          echo "Patch $GitVersion_Patch"
+          echo "FullBuildMetaData $GitVersion_FullBuildMetaData"
+          echo "BranchName $GitVersion_BranchName"
+          echo "EscapedBranchName $GitVersion_EscapedBranchName"
+          echo "Sha $GitVersion_Sha"
+          echo "ShortSha $GitVersion_ShortSha"
+          echo "MajorMinorPatch $GitVersion_MajorMinorPatch"
+          echo "SemVer $GitVersion_SemVer"
+          echo "FullSemVer $GitVersion_FullSemVer"
+          echo "AssemblySemVer $GitVersion_AssemblySemVer"
+          echo "AssemblySemFileVer $GitVersion_AssemblySemFileVer"
+          echo "PreReleaseTag $GitVersion_PreReleaseTag"
+          echo "PreReleaseTagWithDash $GitVersion_PreReleaseTagWithDash"
+          echo "PreReleaseNumber $GitVersion_PreReleaseNumber"
+          echo "WeightedPreReleaseNumber $GitVersion_WeightedPreReleaseNumber"
+          echo "InformationalVersion $GitVersion_InformationalVersion"
+          echo "CommitDate $GitVersion_CommitDate"
+          echo "VersionSourceSha $GitVersion_VersionSourceSha"
+          echo "CommitsSinceVersionSource $GitVersion_CommitsSinceVersionSource"
+          echo "UncommittedChanges $GitVersion_UncommittedChanges"
