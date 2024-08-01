@@ -18,8 +18,6 @@ Task("PrintGithub")
         if(isGitHubActionsBuild)
         {
             Information("{0}",Newtonsoft.Json.JsonConvert.SerializeObject(GitHubActions,Newtonsoft.Json.Formatting.Indented));
-            // Information("GitHubActions.Environment.Home          {0}",GitHubActions.Environment.Home);
-            // Information("GitHubActions.PullRequest.IsPullRequest {0}",GitHubActions.PullRequest.IsPullRequest);
         }
     });
 
