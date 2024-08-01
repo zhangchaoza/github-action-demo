@@ -23,10 +23,7 @@ Task("Gitversion")
         {
             // Writing version variables to $GITHUB_ENV file for 'GitHubActions'.
             GitVersion(new GitVersionSettings { OutputType = GitVersionOutput.BuildServer });
-            foreach(var envVar in EnvironmentVariables())
-            {
-                Information("Key: {0} \tValue: \"{1}\"",envVar.Key,envVar.Value);
-            }
+            Information("{0}",System.IO.File.ReadAllText(Environment.GetEnvironmentVariable("GITHUB_ENV")));
         }
 
         GitVersion gitVersion = GitVersion(new GitVersionSettings { OutputType = GitVersionOutput.Json });
