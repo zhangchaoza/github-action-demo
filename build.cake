@@ -19,8 +19,17 @@ Task("PrintGithub")
 Task("Gitversion")
     .Does(() =>
     {
-        GitVersion gitVersion = GitVersion(new GitVersionSettings { OutputType = GitVersionOutput.BuildServer });
-        // GitVersion gitVersion = GitVersion(new GitVersionSettings { OutputType = GitVersionOutput.Json });
+        if(!BuildSystem.IsLocalBuild)
+        {
+            // Writing version variables to $GITHUB_ENV file for 'GitHubActions'.
+            GitVersion(new GitVersionSettings { OutputType = GitVersionOutput.BuildServer });
+            foreach(var envVar in EnvironmentVariables())
+            {
+                Information("Key: {0} \tValue: \"{1}\"",envVar.Key,envVar.Value);
+            }
+        }
+
+        GitVersion gitVersion = GitVersion(new GitVersionSettings { OutputType = GitVersionOutput.Json });
         Information("{0}",Newtonsoft.Json.JsonConvert.SerializeObject(gitVersion,Newtonsoft.Json.Formatting.Indented));
     });
 
