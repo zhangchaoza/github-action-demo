@@ -1,0 +1,34 @@
+name: cake workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run the Cake script <PrintGithub>
+        uses: cake-build/cake-action@v2
+        with:
+          cake-version: 4.0.0
+          target: PrintGithub
+  gitversion:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run the Cake script <Gitversion>
+        uses: cake-build/cake-action@v2
+        with:
+          cake-version: 4.0.0
+          target: Gitversion
